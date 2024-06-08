@@ -1,4 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using Objects;
+using Speckle.Core.Api;
+using Speckle.Core.Models;
 using Speckle.Automate.Sdk;
 using Speckle.Core.Models.Extensions;
 
@@ -14,17 +20,19 @@ public static class AutomateFunction
 
     Console.WriteLine("Received version: " + commitObject);
 
-    var count = commitObject
-      .Flatten();
+    var flatData = commitObject.Flatten().ToList();
+    var windows = flatData.FindAll(obj => (string)obj["category"] == "Windows");
+    Console.WriteLine($"Counted {windows} objects");
+
       // .Count(b => b.speckle_type == functionInputs.SpeckleTypeToCount);
 
-    Console.WriteLine($"Counted {count} objects");
+    // Console.WriteLine($"Counted {count} objects");
 
     // if (count < functionInputs.SpeckleTypeTargetCount) {
     //   automationContext.MarkRunFailed($"Counted {count} objects where {functionInputs.SpeckleTypeTargetCount} were expected");
     //   return;
     // }
 
-    automationContext.MarkRunSuccess($"Counted {count} objects");
+    automationContext.MarkRunSuccess($"Counted {windows} objects");
   }
 }
