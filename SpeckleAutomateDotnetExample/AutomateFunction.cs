@@ -4,10 +4,7 @@ using Speckle.Core.Models.Extensions;
 
 public static class AutomateFunction
 {
-  public static async Task Run(
-    AutomationContext automationContext,
-    FunctionInputs functionInputs
-  )
+  public static async Task Run(AutomationContext automationContext)
   {
     Console.WriteLine("Starting execution");
     _ = typeof(ObjectsKit).Assembly; // INFO: Force objects kit to initialize
@@ -18,15 +15,15 @@ public static class AutomateFunction
     Console.WriteLine("Received version: " + commitObject);
 
     var count = commitObject
-      .Flatten()
-      .Count(b => b.speckle_type == functionInputs.SpeckleTypeToCount);
+      .Flatten();
+      // .Count(b => b.speckle_type == functionInputs.SpeckleTypeToCount);
 
     Console.WriteLine($"Counted {count} objects");
 
-    if (count < functionInputs.SpeckleTypeTargetCount) {
-      automationContext.MarkRunFailed($"Counted {count} objects where {functionInputs.SpeckleTypeTargetCount} were expected");
-      return;
-    }
+    // if (count < functionInputs.SpeckleTypeTargetCount) {
+    //   automationContext.MarkRunFailed($"Counted {count} objects where {functionInputs.SpeckleTypeTargetCount} were expected");
+    //   return;
+    // }
 
     automationContext.MarkRunSuccess($"Counted {count} objects");
   }
