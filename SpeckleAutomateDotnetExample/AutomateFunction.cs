@@ -21,8 +21,7 @@ public static class AutomateFunction
     Console.WriteLine("Received version: " + commitObject);
 
     var flatData = commitObject.Flatten().ToList();
-    var windows = flatData.FindAll(obj => (string)obj["category"] == "Windows");
-    Console.WriteLine($"Counted {windows} objects");
+    Console.WriteLine($"We've got {flatData} objects");
 
       // .Count(b => b.speckle_type == functionInputs.SpeckleTypeToCount);
 
@@ -33,6 +32,6 @@ public static class AutomateFunction
     //   return;
     // }
 
-    automationContext.MarkRunSuccess($"Counted {windows} objects");
+    automationContext.MarkRunSuccess($"We've got {flatData} objects");
   }
 }
