@@ -34,6 +34,6 @@ public static class AutomateFunction
     //   return;
     // }
 
-    automationContext.MarkRunSuccess($"We've got {flatData} objects");
+    automationContext.MarkRunSuccess($"We've got {objects} objects");
   }
 }
