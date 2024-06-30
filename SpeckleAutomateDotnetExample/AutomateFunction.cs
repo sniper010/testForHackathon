@@ -20,8 +20,10 @@ public static class AutomateFunction
 
     Console.WriteLine("Received version: " + commitObject);
 
-    var flatData = commitObject.Flatten().ToList();
-    Console.WriteLine($"We've got {flatData} objects");
+    Console.WriteLine("Received version: " + commitObject);
+    var objects = commitObject.Flatten().Where(x => x["parameters"] != null);
+
+    Console.WriteLine($"We've got {objects} objects");
 
       // .Count(b => b.speckle_type == functionInputs.SpeckleTypeToCount);
 
